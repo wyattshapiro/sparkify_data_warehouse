@@ -126,7 +126,9 @@ There are several main scripts:
 ## Analysis
 
 In src/analyze_tables.py, I created several example queries. These queries showed that:
+
 - ex. 1
+- ex. 2
 
 ## Future Optimizations
 
