@@ -17,8 +17,8 @@ This format does not lend itself well to analysis.
 In order to enable a team to effectively gain insight from user activity, a data engineer needs to structure the data and load it into a database. The proposed plan consists of a Python ETL pipeline that will:
 
 - Extract each JSON file hosted on S3.
-- Load data into staging tables with star schema on Redshift.
-- Load data into analytics tables on Redshift.
+- Load data into staging tables on Redshift.
+- Transform and load data into analytics tables with star schema on Redshift.
 - Execute SQL queries on analytics tables.
 
 ## Data
@@ -110,7 +110,7 @@ There are several main scripts:
 - src/dwh.cfg.sample: Specifies required environmental variables for AWS connections. Note: Actual file is dwh.cfg but it is in .gitignore to prevent exposing real credentials.
 - src/create_tables.py: Drops and creates your tables. You run this file to reset your tables before each time you run your ETL scripts.
 - src/etl.py: Reads and processes *all files* from song_data and log_data and loads them into your tables.
-- src/analyze_tables.py: Runs queries on Postgres db to surface analytical insights.
+- src/analyze_tables.py: Runs queries on Redshift cluster to surface analytical insights.
 - src/sql_queries.py: Contains all sql queries, and is used during ETL process and analysis.
 
 **Steps to run**
@@ -127,10 +127,11 @@ There are several main scripts:
 
 In src/analyze_tables.py, I created several example queries. These queries showed that:
 
-- ex. 1
-- ex. 2
+- Users played bands like Muse, The Smiths, and Radiohead the most.
+- Users are spread across the US - Cleveland, Ohio to LA.
 
 ## Future Optimizations
 
+- Add genre data to song table
 - Add data quality checks
 - Create a dashboard for analytic queries
